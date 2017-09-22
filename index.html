@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        
+        <div id="main">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              
+              <h1 class="brand-heading">ANDREAS KARAGOUNIS</h1>
+              <p class="intro-text">Data Scientist.</p>
+            
+              <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="content-section text-left">
+      <div class="container">
+        <div class="row">
+          <img class="prof-pic" src="img/mount_olympous.jpg">
+          <div class="col-lg-8 mx-auto">
+
+            <h2 class="heading">About Me!</h2>
+            <p>Hi my name is Andreas Karagounis and that is me at the top of Mount Olympous in Greece. I am currently pursuing a Masters in computer science at Brown University. Interested in deep learning, machine learning, data science and computer systems. Presently focusing on computer vision and its applications. </p>
+            <p>I am working in <a href="http://serre-lab.clps.brown.edu/">Serre Lab</a> at Brown University on two different research projects. <a href="https://github.com/akaragou/pathology">One project</a> focus on using deep convolutional neural networks along with saliency maps for automated detection of tumor cells. The <a href="https://github.com/akaragou/project_nsf">other project</a> explores how convolutional neural networks correlate with human vision. </p>      
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section text-center">
+      <div class="container">
+        <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <ul class="list-inline banner-social-buttons">
+          <li class="list-inline-item">
+          <a href="files/Resume.pdf" class="btn btn-default btn-lg">
+              <i class="fa fa-file-text fa-fw"></i>
+                  <span class="network-name">Resume</span></a>
+         </li>
+           <li class="list-inline-item">
+          <a href="mailto:andreas_karagounis@brown.edu" class="btn btn-default btn-lg">
+              <i class="fa fa-envelope fa-fw"></i>
+                  <span class="network-name">Email</span></a>
+         </li>
+          <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/andreas-karagounis-208193129/" class="btn btn-default btn-lg">
+                  <i class="fa fa-linkedin fa-fw"></i>
+                  <span class="network-name">Linkedin</span>
+                </a>
+              </li>
+           <li class="list-inline-item">
+                <a href="https://github.com/akaragou" class="btn btn-default btn-lg">
+                  <i class="fa fa-github fa-fw"></i>
+                  <span class="network-name">Github</span>
+                </a>
+              </li>
+           
+             <li class="list-inline-item">
+          <a href="https://www.kaggle.com/akaragou" class="btn btn-default btn-lg">Kaggle</a>
+        </li>
+      </ul>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.js"></script>
+  
+
+  </body>
+</html>
+
+
+<script>
+
+var chartDiv = document.getElementById("main");
+var svg = d3.select(chartDiv).append("svg");
+
+var w = window,
+d = document,
+e = d.documentElement,
+g = d.getElementsByTagName('body')[0],
+x = w.innerWidth || e.clientWidth || g.clientWidth,
+y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+  svg
+    .attr("width", x)
+    .attr("height", y);
+
+  var nodes = d3.range(300).map(function() { return {radius: Math.random() *12 + 4}; }),
+      root = nodes[0],
+      color = d3.scale.category10();
+
+  root.radius = 0;
+  root.fixed = true;
+
+
+var force = d3.layout.force()
+    .gravity(0.04)
+    .charge(function(d, i) { return i ? 0 : -2000; })
+    .nodes(nodes)
+    .size([x, y]);
+
+force.start();
+
+svg.selectAll("circle")
+    .data(nodes.slice(1))
+  .enter().append("circle")
+    .attr("r", function(d) { return d.radius; })
+    .style("fill", function(d, i) { return color(i % 1); });
+
+force.on("tick", function(e) {
+  var q = d3.geom.quadtree(nodes),
+      i = 0,
+      n = nodes.length;
+
+  while (++i < n) q.visit(collide(nodes[i]));
+
+  svg.selectAll("circle")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+});
+
+svg.on("mousemove", function() {
+  var p1 = d3.mouse(this);
+  root.px = p1[0];
+  root.py = p1[1];
+  force.resume();
+});
+
+function collide(node) {
+  var r = node.radius + 20,
+      nx1 = node.x - r,
+      nx2 = node.x + r,
+      ny1 = node.y - r,
+      ny2 = node.y + r;
+  return function(quad, x1, y1, x2, y2) {
+    if (quad.point && (quad.point !== node)) {
+      var x = node.x - quad.point.x,
+          y = node.y - quad.point.y,
+          l = Math.sqrt(x * x + y * y),
+          r = node.radius + quad.point.radius;
+      if (l < r) {
+        l = (l - r) / l * .5;
+        node.x -= x *= l;
+        node.y -= y *= l;
+        quad.point.x += x;
+        quad.point.y += y;
+      }
+    }
+    return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+  };
+}
+
+function updateWindow(){
+    x = w.innerWidth || e.clientWidth || g.clientWidth;
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+    
+    svg.attr("width", x).attr("height", y);
+    force
+    .nodes(nodes)
+    .size([x, y]);
+    force.start();
+
+}
+window.onresize = updateWindow;
+
+</script>
+

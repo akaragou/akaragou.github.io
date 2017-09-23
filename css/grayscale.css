@@ -189,7 +189,7 @@ width:100%;
   }
 
 .content-section .prof-pic {
-     width:330px;
+     width:320px;
      height:345px;
      padding-bottom: 50px;
      padding-left: 15px;
@@ -197,7 +197,7 @@ width:100%;
 
 @media (max-width:  1199px) {
   .content-section .prof-pic {
-    width: 190px;
+    width: 185px;
     height:215px;
   }
 }

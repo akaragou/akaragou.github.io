@@ -147,25 +147,7 @@ width:100%;
         top: 480px;
         font-size: 25px; } }
 
-.btn-circle {
-  font-size: 26px;
-  width: 55px;
-  height: 55px;
-  top: 650px;
-  
-  -webkit-transition: background 0.3s ease-in-out;
-  -moz-transition: background 0.3s ease-in-out;
-  transition: background 0.3s ease-in-out;
-  color: white;
-  border: 2px solid white;
-  border-radius: 100% !important;
-  background: transparent;
-  position: absolute; }
-  .btn-circle:focus, .btn-circle:hover {
-    position: absolute;
-    color: white;
-    outline: none;
-    background: rgba(255, 255, 255, 0.1); }
+
 
 @media (max-width:  768px) {
 

@@ -132,6 +132,8 @@ a {
     display: table-cell;
     vertical-align: middle; }
     .masthead .intro-body .brand-heading {
+       text-transform: none !important;
+
       font-size: 50px; }
     .masthead .intro-body .intro-text {
       font-size: 18px; }
@@ -140,6 +142,7 @@ a {
       height: 100%;
       padding: 0; }
       .masthead .intro-body .brand-heading {
+         text-transform: none !important;
         font-size: 100px; }
       .masthead .intro-body .intro-text {
         font-size: 22px; } }

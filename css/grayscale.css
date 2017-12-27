@@ -46,11 +46,27 @@ a {
     text-decoration: none;
     color: #1d9b6c; }
 
-#main{
-position: relative;
-height:100%;
-width:100%;
+
+
+.second-heading .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.0em;
+  padding-right: 0.05em;
+  padding-bottom: 0.0em;
 }
+
+.second-heading .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
 
 
 #mainNav {
@@ -104,48 +120,30 @@ width:100%;
   display: table;
   width: 100%;
   height: auto;
-  padding: 100px 0;
+  padding: 200px 0;
   text-align: center;
   color: white;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  -webkit-user-select: none;
-  background-size: cover;
-
-   }
+  background-size: cover; }
   .masthead .intro-body {
     display: table-cell;
     vertical-align: middle; }
     .masthead .intro-body .brand-heading {
-      position: absolute;
-      top: 250px;
-      font-size: 50px;
-      text-align: center;
-      width: 100%;
-      height:auto;
-      pointer-events:none;
-       }
+      font-size: 50px; }
     .masthead .intro-body .intro-text {
-      position: absolute;
-      top: 360px;
-      text-align: center;
-      width: 100%;
-      height:auto;
-      font-size: 20px;
-      pointer-events:none;     
-       }
+      font-size: 18px; }
   @media (min-width: 768px) {
     .masthead {
       height: 100%;
       padding: 0; }
       .masthead .intro-body .brand-heading {
-        top: 250px;
         font-size: 100px; }
       .masthead .intro-body .intro-text {
-        top: 480px;
-        font-size: 25px; } }
+        font-size: 22px; } }
+
 
 
 .content-section {

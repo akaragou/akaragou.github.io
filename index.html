@@ -24,7 +24,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/grayscale.css" rel="stylesheet">
-    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     
 
   </head>
@@ -62,7 +62,12 @@
             <div class="col-lg-8 mx-auto">
               
               <h1 class="brand-heading">ANDREAS KARAGOUNIS</h1>
-              <p class="intro-text">Data Scientist.</p>
+              <p class="second-heading">
+              <span class="text-wrapper" style="font-size:26px;">
+                <span class="letters">Data Scientist</span>
+                <span class="line"></span>
+              </span>
+            </p>
         
             </div>
           </div>
@@ -142,97 +147,51 @@
 
 <script>
 
-var chartDiv = document.getElementById("main");
-var svg = d3.select(chartDiv).append("svg");
-
-var w = window,
-d = document,
-e = d.documentElement,
-g = d.getElementsByTagName('body')[0],
-x = (w.innerWidth || e.clientWidth || g.clientWidth) - 15,
-y = (w.innerHeight|| e.clientHeight|| g.clientHeight);
-
-  svg
-    .attr("width", x)
-    .attr("height", y);
-
-  var nodes = d3.range(300).map(function() { return {radius: Math.random() *12 + 4}; }),
-      root = nodes[0],
-      color = d3.scale.category10();
-
-  root.radius = 10;
-  root.fixed = true;
-
-
-var force = d3.layout.force()
-    .gravity(0.04)
-    .charge(function(d, i) { return i ? 0 : -2000; })
-    .nodes(nodes)
-    .size([x, y]);
-
-force.start();
-
-svg.selectAll("circle")
-    .data(nodes.slice(1))
-  .enter().append("circle")
-    .attr("r", function(d) { return d.radius; })
-    .style("fill", function(d, i) { return color(i % 1); });
-
-force.on("tick", function(e) {
-  var q = d3.geom.quadtree(nodes),
-      i = 0,
-      n = nodes.length;
-
-  while (++i < n) q.visit(collide(nodes[i]));
-
-  svg.selectAll("circle")
-      .attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; });
+$('.brand-heading').each(function(){
+  $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
 });
 
-svg.on("mousemove", function() {
-  var p1 = d3.mouse(this);
-  root.px = p1[0];
-  root.py = p1[1];
-  force.resume();
-});
-
-function collide(node) {
-  var r = node.radius + 20,
-      nx1 = node.x - r,
-      nx2 = node.x + r,
-      ny1 = node.y - r,
-      ny2 = node.y + r;
-  return function(quad, x1, y1, x2, y2) {
-    if (quad.point && (quad.point !== node)) {
-      var x = node.x - quad.point.x,
-          y = node.y - quad.point.y,
-          l = Math.sqrt(x * x + y * y),
-          r = node.radius + quad.point.radius;
-      if (l < r) {
-        l = (l - r) / l * .5;
-        node.x -= x *= l;
-        node.y -= y *= l;
-        quad.point.x += x;
-        quad.point.y += y;
-      }
+anime.timeline({loop: false})
+  .add({
+    targets: '.brand-heading .letter',
+    opacity: [0,1],
+    easing: "easeInOutQuad",
+    duration: 2250,
+    delay: function(el, i) {
+      return 150 * (i+1)
     }
-    return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-  };
-}
+  });
+  // Wrap every letter in a span
+$('.second-heading .letters').each(function(){
+  $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+});
 
-function updateWindow(){
-    x = (w.innerWidth || e.clientWidth || g.clientWidth) - 15;
-    y = (w.innerHeight|| e.clientHeight|| g.clientHeight);
-    
-    svg.attr("width", x).attr("height", y);
-    force
-    .nodes(nodes)
-    .size([x, y]);
-    force.start();
-
-}
-window.onresize = updateWindow;
+anime.timeline({loop: false})
+  .add({
+    targets: '.second-heading .line',
+    scaleX: [0,1],
+    opacity: [0.5,1],
+    easing: "easeInOutExpo",
+    duration: 1000,
+    delay: 3000
+  })
+  .add({
+    targets: '.second-heading .letter',
+    opacity: [0,1],
+    translateX: [40,0],
+    translateZ: 0,
+    scaleX: [0.3, 1],
+    easing: "easeOutExpo",
+    duration: 900,
+    offset: '-=600',
+    delay: function(el, i) {
+      return 150 + 25 * i;
+    }
+  })
+  .add({
+    targets: '.second-heading',
+    opacity: 1
+  })
 
 </script>
 
